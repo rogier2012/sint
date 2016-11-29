@@ -3,12 +3,18 @@ from pygame.locals import *
 import os
 from time import sleep
 import matplotlib as plt
-from subprocess import call
+from subprocess import *
 
 
-res = call(["cat", "/proc/net/wireless"])
-for x in res:
-    print(x)
+res = Popen(["cat", "/proc/net/wireless"],stdout=PIPE )
+corr = ""
+line = res.stdout.readline()
+while line != '':
+        print(line)
+        if "wlan0" in line:
+            corr = line
+        line = res.stdout.readline()
+print(corr[18:-30])
 quality = 0
 if (quality <= 0):
     dBm = -100
