@@ -10,12 +10,13 @@ res = Popen(["cat", "/proc/net/wireless"],stdout=PIPE )
 corr = ""
 line = res.stdout.readline()
 while line != '':
-        print(line)
+        # print(line)
         if "wlan0" in line:
             corr = line
         line = res.stdout.readline()
-print(corr[18:-30])
-quality = 0
+# print(corr[18:-30])
+
+quality = int(corr[18:-30])
 if (quality <= 0):
     dBm = -100
 elif (quality >= 100):
