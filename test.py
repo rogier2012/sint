@@ -8,7 +8,7 @@ WHITE = (255,255,255)
 BLACK = (0,0,0)
 DEFAULT = (80,168,227)
 CENTER = (160,120)
-GREY = (10,10,10)
+GREY = (238,238,238)
 
 os.putenv('SDL_FBDEV', '/dev/fb1')
 os.putenv('SDL_MOUSEDRV', 'TSLIB')
@@ -23,7 +23,7 @@ def begin_screen():
 
 def show_bars():
     lcd.fill(DEFAULT)
-    rect = pygame.Rect(80,80,50,50)
+    rect = pygame.Rect(200,80,80,30)
     lcd.fill(GREY,rect)
     pygame.display.update()
 
