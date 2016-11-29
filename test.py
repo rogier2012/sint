@@ -8,6 +8,7 @@ WHITE = (255,255,255)
 BLACK = (0,0,0)
 DEFAULT = (80,168,227)
 CENTER = (160,120)
+GREY = (10,10,10)
 
 os.putenv('SDL_FBDEV', '/dev/fb1')
 os.putenv('SDL_MOUSEDRV', 'TSLIB')
@@ -20,6 +21,11 @@ def begin_screen():
     lcd.blit(text_surface, rect)
     pygame.display.update()
 
+def show_bars():
+    lcd.fill(DEFAULT)
+    rect = pygame.Rect(80,80,50,50)
+    lcd.fill(GREY,rect)
+    pygame.display.update()
 
 pygame.init()
 pygame.mouse.set_visible(False)
@@ -51,11 +57,7 @@ while running:
                 pygame.display.update()
                 page = 3
             elif (page == 3):
-                lcd.fill(DEFAULT)
-                text_surface = font_small.render("Text hello Hello", True, WHITE)
-                rect = text_surface.get_rect(center=CENTER)
-                lcd.blit(text_surface, rect)
-                pygame.display.update()
+                show_bars()
                 page = 4
             elif (page == 4):
                 lcd.fill(DEFAULT)
