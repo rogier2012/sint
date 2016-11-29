@@ -8,7 +8,9 @@ WHITE = (255,255,255)
 BLACK = (0,0,0)
 DEFAULT = (80,168,227)
 CENTER = (160,120)
-GREY = (238,238,238)
+GREEN = (92, 184, 92)
+ORANGE = (236, 151, 31)
+RED = (201, 48, 44)
 
 os.putenv('SDL_FBDEV', '/dev/fb1')
 os.putenv('SDL_MOUSEDRV', 'TSLIB')
@@ -21,22 +23,48 @@ def begin_screen():
     lcd.blit(text_surface, rect)
     pygame.display.update()
 
-def show_bars():
+def show_bars(number=5):
     lcd.fill(DEFAULT)
-    rect = pygame.Rect(200,80,80,30)
-    lcd.fill(GREY,rect)
+
+    color = RED
+    if number == 2:
+        color = RED
+    elif number == 3:
+        color = ORANGE
+    elif number == 4:
+        color = ORANGE
+    elif number == 5:
+        color = GREEN
+
+    if number >= 1:
+        rect = pygame.Rect(200, 185,  80,30)
+        lcd.fill(color,rect)
+    if number >= 2:
+        rect = pygame.Rect(200, 145, 80, 30)
+        lcd.fill(color, rect)
+    if number >= 3:
+        rect = pygame.Rect(200, 105, 80, 30)
+        lcd.fill(color, rect)
+    if number >= 4:
+        rect = pygame.Rect(200, 65, 80, 30)
+        lcd.fill(color, rect)
+    if number >= 5:
+        rect = pygame.Rect(200, 25, 80, 30)
+        lcd.fill(color, rect)
     pygame.display.update()
 
 pygame.init()
-pygame.mouse.set_visible(False)
+pygame.mouse.set_visible(True)
 lcd = pygame.display.set_mode((320, 240))
-lcd.fill((0,0,0))
-pygame.display.update()
+
 
 font_big = pygame.font.Font(None, 50)
 font_small = pygame.font.Font(None, 20)
-page = 1
+begin_screen()
+pygame.display.update()
+page = 2
 running = True
+counter = 1
 while running:
     # Scan touchscreen events
 
@@ -57,7 +85,7 @@ while running:
                 pygame.display.update()
                 page = 3
             elif (page == 3):
-                show_bars()
+                show_bars(counter)
                 page = 4
             elif (page == 4):
                 lcd.fill(DEFAULT)
@@ -77,6 +105,7 @@ while running:
                 if pos[0] > 160:
                     begin_screen()
                     page = 2
+                    counter = counter + 1
                 else:
                     pygame.display.quit()
                     pygame.quit()
