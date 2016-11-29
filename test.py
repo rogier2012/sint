@@ -13,6 +13,14 @@ os.putenv('SDL_FBDEV', '/dev/fb1')
 os.putenv('SDL_MOUSEDRV', 'TSLIB')
 os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
 
+def begin_screen():
+    lcd.fill(DEFAULT)
+    text_surface = font_big.render('Hello World', True, WHITE)
+    rect = text_surface.get_rect(center=CENTER)
+    lcd.blit(text_surface, rect)
+    pygame.display.update()
+
+
 pygame.init()
 pygame.mouse.set_visible(False)
 lcd = pygame.display.set_mode((320, 240))
@@ -32,21 +40,8 @@ while running:
             pygame.quit()
             running = False
         elif(event.type is MOUSEBUTTONUP):
-            if (page == -1):
-                pygame.display.quit()
-                pygame.quit()
-                running = False
-            elif (page == 0):
-                lcd.fill(WHITE)
-
-                pygame.display.update()
-                page = 1
-            elif (page == 1 ):
-                lcd.fill(DEFAULT)
-                text_surface = font_big.render('Hello World', True, WHITE)
-                rect = text_surface.get_rect(center=CENTER)
-                lcd.blit(text_surface, rect)
-                pygame.display.update()
+            if (page == 1 ):
+                begin_screen()
                 page = 2
             elif (page == 2):
                 lcd.fill(DEFAULT)
@@ -78,8 +73,13 @@ while running:
             elif (page == 5):
                 pos = pygame.mouse.get_pos()
                 if pos[0] > 160:
-                    page = 0
+                    begin_screen()
+                    page = 2
                 else:
-                    page = -1
+                    pygame.display.quit()
+                    pygame.quit()
+                    running = False
 
     sleep(0.1)
+
+
