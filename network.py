@@ -16,10 +16,12 @@ while line != '':
         line = res.stdout.readline()
 # print(corr[18:-30])
 
-quality = int(corr[18:-30])
+quality = int(corr[20:-53])
 if (quality <= 0):
     dBm = -100
 elif (quality >= 100):
     dBm = -50
 else:
     dBm = (quality / 2) - 100
+
+print(dBm)
