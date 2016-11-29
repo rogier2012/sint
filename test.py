@@ -14,7 +14,7 @@ os.putenv('SDL_MOUSEDRV', 'TSLIB')
 os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
 
 pygame.init()
-pygame.mouse.set_visible(True)
+pygame.mouse.set_visible(False)
 lcd = pygame.display.set_mode((320, 240))
 lcd.fill((0,0,0))
 pygame.display.update()
