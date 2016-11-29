@@ -22,14 +22,15 @@ pygame.display.update()
 font_big = pygame.font.Font(None, 50)
 font_small = pygame.font.Font(None, 20)
 page = 1
-
-while True:
+running = True
+while running:
     # Scan touchscreen events
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.display.quit()
             pygame.quit()
+            running = False
         elif(event.type is MOUSEBUTTONUP):
             if (page == 0):
                 lcd.fill(WHITE)
