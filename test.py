@@ -54,7 +54,7 @@ def show_bars(number=5):
     pygame.display.update()
 
 pygame.init()
-pygame.mouse.set_visible(True)
+pygame.mouse.set_visible(False)
 lcd = pygame.display.set_mode((320, 240))
 
 
@@ -104,7 +104,7 @@ while running:
                 pos = pygame.mouse.get_pos()
                 if pos[0] > 160:
                     begin_screen()
-                    page = 2
+                    page = 3
                     counter = counter + 1
                 else:
                     pygame.display.quit()
