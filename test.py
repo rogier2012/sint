@@ -64,20 +64,20 @@ while running:
                 page = 4
             elif (page == 4):
                 lcd.fill(DEFAULT)
-                text_surface = font_small.render("Quit?", True, WHITE)
-                rect = text_surface.get_rect(center=CENTER)
+                text_surface = font_big.render("Quit?", True, WHITE)
+                rect = text_surface.get_rect(center=(160,80))
                 lcd.blit(text_surface, rect)
-                text_surface = font_small.render("Yes", True, WHITE)
-                rect = text_surface.get_rect(center=(80,80))
+                text_surface = font_big.render("Yes", True, WHITE)
+                rect = text_surface.get_rect(center=(80,160))
                 lcd.blit(text_surface, rect)
-                text_surface = font_small.render("No", True, WHITE)
-                rect = text_surface.get_rect(center=(240,80))
+                text_surface = font_big.render("No", True, WHITE)
+                rect = text_surface.get_rect(center=(240,160))
                 lcd.blit(text_surface, rect)
                 pygame.display.update()
                 page = 5
             elif (page == 5):
                 pos = pygame.mouse.get_pos()
-                if pos > 160:
+                if pos[0] > 160:
                     page = 0
                 else:
                     page = -1
