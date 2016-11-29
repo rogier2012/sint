@@ -32,7 +32,11 @@ while running:
             pygame.quit()
             running = False
         elif(event.type is MOUSEBUTTONUP):
-            if (page == 0):
+            if (page == -1):
+                pygame.display.quit()
+                pygame.quit()
+                running = False
+            elif (page == 0):
                 lcd.fill(WHITE)
 
                 pygame.display.update()
@@ -57,5 +61,25 @@ while running:
                 rect = text_surface.get_rect(center=CENTER)
                 lcd.blit(text_surface, rect)
                 pygame.display.update()
-                page = 3
+                page = 4
+            elif (page == 4):
+                lcd.fill(DEFAULT)
+                text_surface = font_small.render("Quit?", True, WHITE)
+                rect = text_surface.get_rect(center=CENTER)
+                lcd.blit(text_surface, rect)
+                text_surface = font_small.render("Yes", True, WHITE)
+                rect = text_surface.get_rect(center=(80,80))
+                lcd.blit(text_surface, rect)
+                text_surface = font_small.render("No", True, WHITE)
+                rect = text_surface.get_rect(center=(240,80))
+                lcd.blit(text_surface, rect)
+                pygame.display.update()
+                page = 5
+            elif (page == 5):
+                pos = pygame.mouse.get_pos()
+                if pos > 160:
+                    page = 0
+                else:
+                    page = -1
+
     sleep(0.1)
