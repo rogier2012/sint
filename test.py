@@ -32,8 +32,10 @@ class signalStrength(threading.Thread):
         self.running = running
 
     def run(self):
+        last_result = 1
         while running:
-            signal_strength(self.surface)
+            last_result = signal_strength(self.surface,last_result)
+            sleep(0.5)
 
 
 def show_bars(surface,number=5):
@@ -67,7 +69,7 @@ def show_bars(surface,number=5):
     pygame.display.update()
 
 
-def signal_strength(surface):
+def signal_strength(surface,previous):
     result = 0.0
     for i in range(100):
         res = Popen(["cat", "/proc/net/wireless"], stdout=PIPE)
@@ -89,9 +91,10 @@ def signal_strength(surface):
             dBm = (quality / 2) - 100
 
         result = float(result) + (float(quality) / 100)
-    print(int(result/20))
-    show_bars(surface,int(result/20))
-    sleep(0.5)
+    bars = int(result/20)
+    if (bars != previous):
+        show_bars(surface,bars)
+    return bars
 
 
 pygame.init()
