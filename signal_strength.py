@@ -86,6 +86,6 @@ def signal_strength(surface,previous):
 
     return bars
 
-while True:
-    print(signal_strength(None,1))
-    sleep(0.1)
+# while True:
+    # print(signal_strength(None,1))
+    # sleep(0.1)

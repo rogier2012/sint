@@ -1,3 +1,4 @@
+import pygame
 from pygame.locals import *
 import os
 from signal_strength import *
@@ -28,7 +29,7 @@ pygame.mouse.set_visible(False)
 lcd = pygame.display.set_mode((320, 240))
 font_big = pygame.font.Font(None, 50)
 font_small = pygame.font.Font(None, 20)
-begin_screen()
+begin_screen(lcd)
 pygame.display.update()
 page = 2
 running = True
@@ -43,7 +44,7 @@ while running:
             running = False
         elif(event.type is MOUSEBUTTONUP):
             if (page == 1 ):
-                begin_screen()
+                begin_screen(lcd)
                 page = 2
             elif (page == 2):
                 lcd.fill(DEFAULT)
