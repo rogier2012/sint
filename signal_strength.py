@@ -75,13 +75,16 @@ def signal_strength(surface,previous):
             signal_string = iwconfig.stdout.readline()
 
         signal_level = ""
-
+        quality = 0
         m = re.search('Signal level=[0-9]*\/[0-9]*', iwconfig_string)
         if m:
             signal_level = m.group(0)
+            m = re.search('[0-9]*',signal_level)
+            if m:
 
-        quality = int(signal_level[13:15])
+                quality = int(m.group(0))
 
+        print(quality)
         if (quality <= 0):
             dBm = -100
         elif (quality >= 100):
