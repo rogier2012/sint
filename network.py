@@ -26,6 +26,6 @@ for i in range(100):
     else:
         dBm = (quality / 2) - 100
 
-    result = float(result) + (float(dBm) / 100)
+    result = float(result) + (float(quality) / 100)
 
 print(result)

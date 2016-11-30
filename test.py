@@ -2,6 +2,8 @@ import pygame
 from pygame.locals import *
 import os
 from time import sleep
+from subprocess import *
+import _thread as thread
 
 #Colours
 WHITE = (255,255,255)
@@ -53,6 +55,34 @@ def show_bars(number=5):
         lcd.fill(color, rect)
     pygame.display.update()
 
+
+def signal_strength():
+    result = 0.0
+    for i in range(100):
+        res = Popen(["cat", "/proc/net/wireless"], stdout=PIPE)
+        corr = ""
+        line = res.stdout.readline()
+        while line != '':
+            # print(line)
+            if "wlan0" in line:
+                corr = line
+            line = res.stdout.readline()
+        # print(corr[18:-30])
+
+        quality = int(corr[20:-53])
+        if (quality <= 0):
+            dBm = -100
+        elif (quality >= 100):
+            dBm = -50
+        else:
+            dBm = (quality / 2) - 100
+
+        result = float(result) + (float(quality) / 100)
+
+    show_bars(int(result/20))
+    sleep(0.5)
+
+
 pygame.init()
 pygame.mouse.set_visible(False)
 lcd = pygame.display.set_mode((320, 240))
@@ -85,7 +115,11 @@ while running:
                 pygame.display.update()
                 page = 3
             elif (page == 3):
-                show_bars(counter)
+                # show_bars(counter)
+                try:
+                    thread.start_new_thread(signal_strength())
+                except:
+
                 page = 4
             elif (page == 4):
                 lcd.fill(DEFAULT)
