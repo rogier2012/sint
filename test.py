@@ -26,12 +26,14 @@ def begin_screen():
     pygame.display.update()
 
 class signalStrength(threading.Thread):
-    def __init__(self,surface):
+    def __init__(self,surface,running):
         threading.Thread.__init__(self)
         self.surface = surface
+        self.running = running
 
     def run(self):
-        signal_strength(self.surface)
+        while running:
+            signal_strength(self.surface)
 
 
 def show_bars(surface,number=5):
@@ -125,7 +127,7 @@ while running:
                 page = 3
             elif (page == 3):
                 # show_bars(counter)
-                myThread = signalStrength(lcd)
+                myThread = signalStrength(lcd,running)
                 myThread.start()
                 page = 4
             elif (page == 4):
