@@ -1,6 +1,7 @@
 import threading
 from time import sleep
 import pygame
+import re
 from subprocess import *
 
 #Colours
@@ -12,8 +13,8 @@ GREEN = (92, 184, 92)
 ORANGE = (236, 151, 31)
 RED = (201, 48, 44)
 
-SIGNAL_LEVEL = ["iwconfig","wlan0","|", "grep", "-o", "'Signal level=[0-9]*\/[0-9]*'"]
-FREQUENCY = ["iwconfig", "wlan0", "|", "grep", "-o" , "'[0-9]\.[0-9]*\sGHz'"]
+SIGNAL_LEVEL =  ["iwconfig", "wlan0"]
+FREQUENCY =     ["iwconfig", "wlan0", "|", "grep", "-o" , "'[0-9]\.[0-9]*\sGHz'"]
 
 class signalStrength(threading.Thread):
     def __init__(self,surface,running):
@@ -65,10 +66,21 @@ def signal_strength(surface,previous):
     # iwconfig wlan0 | grep -o '[0-9]\.[0-9]*\sGHz'
     # Signal level=[0-9]*\/[0-9]*
     for i in range(100):
-        signal = Popen(SIGNAL_LEVEL, stdout=PIPE)
-        freq = Popen(FREQUENCY, stdout=PIPE)
-        signal_string = signal.stdout.readline()
-        quality = int(signal_string[13:15])
+        iwconfig = Popen(SIGNAL_LEVEL, stdout=PIPE)
+        # freq = Popen(FREQUENCY, stdout=PIPE)
+        iwconfig_string = ""
+        signal_string = iwconfig.stdout.readline()
+        while signal_string != '':
+            iwconfig_string = iwconfig_string + signal_string
+            signal_string = iwconfig.stdout.readline()
+
+        signal_level = ""
+
+        m = re.search('Signal level=[0-9]*\/[0-9]*', iwconfig_string)
+        if m:
+            signal_level = m.group(1)
+
+        quality = int(signal_level[13:15])
 
         if (quality <= 0):
             dBm = -100
