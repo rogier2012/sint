@@ -62,8 +62,8 @@ def signal_strength(surface,previous):
     # iwconfig wlan0 | grep -o '[0-9]\.[0-9]*\sGHz'
     # Signal level=[0-9]*\/[0-9]*
     for i in range(100):
-        signal = Popen(["iwconfig wlan0 | grep -o \'Signal level=[0-9]*\/[0-9]*\'"], stdout=PIPE)
-        freq = Popen(["iwconfig wlan0 | grep -o \'[0-9]\.[0-9]*\sGHz\'"], stdout=PIPE)
+        signal = Popen("iwconfig wlan0 | grep -o \'Signal level=[0-9]*\/[0-9]*\'", stdout=PIPE)
+        freq = Popen("iwconfig wlan0 | grep -o \'[0-9]\.[0-9]*\sGHz\'", stdout=PIPE)
         corr = ""
         signal_string = signal.stdout.readline()
         quality = signal_string[13:15]
