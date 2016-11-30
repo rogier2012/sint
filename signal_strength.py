@@ -96,8 +96,9 @@ def signal_strength(surface,previous,page):
 
         result = float(result) + (float(quality) / 100)
     bars = int(result/20)
-    print(result)
-    print(bars)
+    # print(result)
+    # print(bars)
+    print(page)
     if surface is not None:
 
         if (bars != previous and page == 3):
