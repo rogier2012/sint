@@ -3,7 +3,7 @@ from pygame.locals import *
 import os
 from time import sleep
 from subprocess import *
-import _thread as thread
+
 
 #Colours
 WHITE = (255,255,255)
