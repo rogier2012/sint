@@ -1,10 +1,6 @@
-import pygame
 from pygame.locals import *
 import os
-from time import sleep
-from subprocess import *
-import threading
-
+from signal_strength import *
 #Colours
 WHITE = (255,255,255)
 BLACK = (0,0,0)
@@ -18,90 +14,18 @@ os.putenv('SDL_FBDEV', '/dev/fb1')
 os.putenv('SDL_MOUSEDRV', 'TSLIB')
 os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
 
-def begin_screen():
-    lcd.fill(DEFAULT)
+def begin_screen(surface):
+    surface.fill(DEFAULT)
     text_surface = font_big.render('Hello World', True, WHITE)
     rect = text_surface.get_rect(center=CENTER)
-    lcd.blit(text_surface, rect)
+    surface.blit(text_surface, rect)
     pygame.display.update()
 
-class signalStrength(threading.Thread):
-    def __init__(self,surface,running):
-        threading.Thread.__init__(self)
-        self.surface = surface
-        self.running = running
-
-    def run(self):
-        last_result = 1
-        while running:
-            last_result = signal_strength(self.surface,last_result)
-            sleep(0.5)
-
-
-def show_bars(surface,number=5):
-    surface.fill(DEFAULT)
-
-    color = RED
-    if number == 2:
-        color = RED
-    elif number == 3:
-        color = ORANGE
-    elif number == 4:
-        color = ORANGE
-    elif number == 5:
-        color = GREEN
-
-    if number >= 1:
-        rect = pygame.Rect(200, 185,  80,30)
-        surface.fill(color,rect)
-    if number >= 2:
-        rect = pygame.Rect(200, 145, 80, 30)
-        surface.fill(color, rect)
-    if number >= 3:
-        rect = pygame.Rect(200, 105, 80, 30)
-        surface.fill(color, rect)
-    if number >= 4:
-        rect = pygame.Rect(200, 65, 80, 30)
-        surface.fill(color, rect)
-    if number >= 5:
-        rect = pygame.Rect(200, 25, 80, 30)
-        surface.fill(color, rect)
-    pygame.display.update()
-
-
-def signal_strength(surface,previous):
-    result = 0.0
-    for i in range(100):
-        res = Popen(["cat", "/proc/net/wireless"], stdout=PIPE)
-        corr = ""
-        line = res.stdout.readline()
-        while line != '':
-            # print(line)
-            if "wlan0" in line:
-                corr = line
-            line = res.stdout.readline()
-        # print(corr[18:-30])
-
-        quality = int(corr[20:-53])
-        if (quality <= 0):
-            dBm = -100
-        elif (quality >= 100):
-            dBm = -50
-        else:
-            dBm = (quality / 2) - 100
-
-        result = float(result) + (float(quality) / 100)
-    bars = int(result/20)
-    if (bars != previous):
-        show_bars(surface,bars)
-    return bars
 
 
 pygame.init()
 pygame.mouse.set_visible(False)
 lcd = pygame.display.set_mode((320, 240))
-
-
 font_big = pygame.font.Font(None, 50)
 font_small = pygame.font.Font(None, 20)
 begin_screen()
@@ -129,7 +53,6 @@ while running:
                 pygame.display.update()
                 page = 3
             elif (page == 3):
-                # show_bars(counter)
                 myThread = signalStrength(lcd,running)
                 myThread.start()
                 page = 4
@@ -149,7 +72,7 @@ while running:
             elif (page == 5):
                 pos = pygame.mouse.get_pos()
                 if pos[0] > 160:
-                    begin_screen()
+                    begin_screen(lcd)
                     page = 3
                     counter = counter + 1
                 else:
