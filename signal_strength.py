@@ -13,6 +13,7 @@ ORANGE = (236, 151, 31)
 RED = (201, 48, 44)
 
 SIGNAL_LEVEL = ["iwconfig","wlan0","|", "grep", "-o", "'Signal level=[0-9]*\/[0-9]*'"]
+FREQUENCY = ["iwconfig", "wlan0", "|", "grep", "-o" , "'[0-9]\.[0-9]*\sGHz'"]
 
 class signalStrength(threading.Thread):
     def __init__(self,surface,running):
@@ -65,13 +66,10 @@ def signal_strength(surface,previous):
     # Signal level=[0-9]*\/[0-9]*
     for i in range(100):
         signal = Popen(SIGNAL_LEVEL, stdout=PIPE)
-        # freq = Popen("iwconfig wlan0 | grep -o '[0-9]\.[0-9]*\sGHz'", stdout=PIPE)
-        corr = ""
+        freq = Popen(FREQUENCY, stdout=PIPE)
         signal_string = signal.stdout.readline()
-        quality = signal_string[13:15]
-        # print(corr[18:-30])
+        quality = int(signal_string[13:15])
 
-        # quality = int(corr[20:-53])
         if (quality <= 0):
             dBm = -100
         elif (quality >= 100):
@@ -88,6 +86,6 @@ def signal_strength(surface,previous):
 
     return bars
 
-# while True:
-    # print(signal_strength(None,1))
-    # sleep(0.1)
+while True:
+    print(signal_strength(None,1))
+    sleep(0.1)
