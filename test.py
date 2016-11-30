@@ -87,7 +87,7 @@ def signal_strength(surface):
             dBm = (quality / 2) - 100
 
         result = float(result) + (float(quality) / 100)
-
+    print(int(result/20))
     show_bars(surface,int(result/20))
     sleep(0.5)
 
