@@ -55,7 +55,7 @@ while running:
                 page = 3
             elif (page == 3):
                 lcd.fill(DEFAULT)
-                myThread = signalStrength(lcd,running)
+                myThread = signalStrength(lcd,running,page)
                 myThread.start()
                 page = 4
             elif (page == 4):
