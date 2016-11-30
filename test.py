@@ -25,8 +25,17 @@ def begin_screen():
     lcd.blit(text_surface, rect)
     pygame.display.update()
 
-def show_bars(number=5):
-    lcd.fill(DEFAULT)
+class signalStrength(threading.Thread):
+    def __init__(self,surface):
+        threading.Thread.__init__(self)
+        self.surface = surface
+
+    def run(self):
+        signal_strength(self.surface)
+
+
+def show_bars(surface,number=5):
+    surface.fill(DEFAULT)
 
     color = RED
     if number == 2:
@@ -40,23 +49,23 @@ def show_bars(number=5):
 
     if number >= 1:
         rect = pygame.Rect(200, 185,  80,30)
-        lcd.fill(color,rect)
+        surface.fill(color,rect)
     if number >= 2:
         rect = pygame.Rect(200, 145, 80, 30)
-        lcd.fill(color, rect)
+        surface.fill(color, rect)
     if number >= 3:
         rect = pygame.Rect(200, 105, 80, 30)
-        lcd.fill(color, rect)
+        surface.fill(color, rect)
     if number >= 4:
         rect = pygame.Rect(200, 65, 80, 30)
-        lcd.fill(color, rect)
+        surface.fill(color, rect)
     if number >= 5:
         rect = pygame.Rect(200, 25, 80, 30)
-        lcd.fill(color, rect)
+        surface.fill(color, rect)
     pygame.display.update()
 
 
-def signal_strength():
+def signal_strength(surface):
     result = 0.0
     for i in range(100):
         res = Popen(["cat", "/proc/net/wireless"], stdout=PIPE)
@@ -79,7 +88,7 @@ def signal_strength():
 
         result = float(result) + (float(quality) / 100)
 
-    show_bars(int(result/20))
+    show_bars(surface,int(result/20))
     sleep(0.5)
 
 
@@ -116,11 +125,8 @@ while running:
                 page = 3
             elif (page == 3):
                 # show_bars(counter)
-                try:
-                    thread.start_new_thread(signal_strength())
-                except:
-                    print("Error: unable to start thread")
-
+                myThread = signalStrength(lcd)
+                myThread.start()
                 page = 4
             elif (page == 4):
                 lcd.fill(DEFAULT)
