@@ -119,6 +119,7 @@ while running:
                 try:
                     thread.start_new_thread(signal_strength())
                 except:
+                    print("Error: unable to start thread")
 
                 page = 4
             elif (page == 4):
