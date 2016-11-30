@@ -17,15 +17,16 @@ SIGNAL_LEVEL =  ["iwconfig", "wlan0"]
 FREQUENCY =     ["iwconfig", "wlan0", "|", "grep", "-o" , "'[0-9]\.[0-9]*\sGHz'"]
 
 class signalStrength(threading.Thread):
-    def __init__(self,surface,running):
+    def __init__(self,surface,page,running):
         threading.Thread.__init__(self)
         self.surface = surface
         self.running = running
+        self.page = page
 
     def run(self):
         last_result = 1
         while self.running:
-            last_result = signal_strength(self.surface,last_result)
+            last_result = signal_strength(self.surface,last_result,page)
             sleep(0.1)
 
 
@@ -60,7 +61,7 @@ def show_bars(surface,number=5):
     pygame.display.update()
 
 
-def signal_strength(surface,previous):
+def signal_strength(surface,previous,page):
     result = 0.0
 
     # iwconfig wlan0 | grep -o '[0-9]\.[0-9]*\sGHz'
@@ -99,7 +100,7 @@ def signal_strength(surface,previous):
     print(bars)
     if surface is not None:
 
-        if (bars != previous):
+        if (bars != previous and page == 4):
             show_bars(surface,bars)
 
     return bars
