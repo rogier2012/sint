@@ -59,7 +59,7 @@ while running:
                 lcd.fill(DEFAULT)
                 myThread = signalStrength(lcd,running,page)
                 myThread.start()
-
+                myThread.join()
             elif (page == 4):
                 lcd.fill(DEFAULT)
                 text_surface = font_big.render("Quit?", True, WHITE)
@@ -77,7 +77,7 @@ while running:
                 pos = pygame.mouse.get_pos()
                 if pos[0] > 160:
                     begin_screen(lcd)
-                    page = 2
+                    page = 1
                     counter = counter + 1
                 else:
                     pygame.display.quit()
