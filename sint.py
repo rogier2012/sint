@@ -31,13 +31,14 @@ font_big = pygame.font.Font(None, 50)
 font_small = pygame.font.Font(None, 20)
 begin_screen(lcd)
 pygame.display.update()
-page = 2
+page = 1
 running = True
 counter = 1
 while running:
     # Scan touchscreen events
 
     for event in pygame.event.get():
+        page += 1
         if event.type == pygame.QUIT:
             pygame.display.quit()
             pygame.quit()
@@ -45,19 +46,19 @@ while running:
         elif(event.type is MOUSEBUTTONUP):
             if (page == 1 ):
                 begin_screen(lcd)
-                page = 2
+
             elif (page == 2):
                 lcd.fill(DEFAULT)
                 text_surface = font_small.render("Text hello Hello", True, WHITE)
                 rect = text_surface.get_rect(center=CENTER)
                 lcd.blit(text_surface, rect)
                 pygame.display.update()
-                page = 3
+
             elif (page == 3):
                 lcd.fill(DEFAULT)
                 myThread = signalStrength(lcd,running,page)
                 myThread.start()
-                page = 4
+
             elif (page == 4):
                 lcd.fill(DEFAULT)
                 text_surface = font_big.render("Quit?", True, WHITE)
@@ -70,12 +71,12 @@ while running:
                 rect = text_surface.get_rect(center=(240,160))
                 lcd.blit(text_surface, rect)
                 pygame.display.update()
-                page = 5
+
             elif (page == 5):
                 pos = pygame.mouse.get_pos()
                 if pos[0] > 160:
                     begin_screen(lcd)
-                    page = 3
+                    page = 2
                     counter = counter + 1
                 else:
                     pygame.display.quit()
