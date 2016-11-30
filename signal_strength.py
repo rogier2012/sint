@@ -17,7 +17,7 @@ SIGNAL_LEVEL =  ["iwconfig", "wlan0"]
 FREQUENCY =     ["iwconfig", "wlan0", "|", "grep", "-o" , "'[0-9]\.[0-9]*\sGHz'"]
 
 class signalStrength(threading.Thread):
-    def __init__(self,surface,page,running):
+    def __init__(self,surface,running,page):
         threading.Thread.__init__(self)
         self.surface = surface
         self.running = running
