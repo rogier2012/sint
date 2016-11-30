@@ -45,6 +45,7 @@ while running:
             running = False
         elif(event.type is MOUSEBUTTONUP):
             page = page + 1
+            thread_run = False
             if (page == 1 ):
                 begin_screen(lcd)
 
@@ -57,9 +58,10 @@ while running:
 
             elif (page == 3):
                 lcd.fill(DEFAULT)
-                myThread = signalStrength(lcd,running)
+
+                myThread = signalStrength(lcd,thread_run)
                 myThread.start()
-                myThread.join()
+
             elif (page == 4):
                 lcd.fill(DEFAULT)
                 text_surface = font_big.render("Quit?", True, WHITE)
