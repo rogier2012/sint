@@ -21,7 +21,6 @@ class signalStrength(threading.Thread):
         threading.Thread.__init__(self)
         self.surface = surface
         self.running = running
-        self.page = page
 
     def run(self):
         last_result = 1
@@ -100,7 +99,7 @@ def signal_strength(surface,previous):
     # print(bars)
     if surface is not None:
 
-        if (bars != previous and page == 3):
+        if (bars != previous):
             show_bars(surface,bars)
 
     return bars
