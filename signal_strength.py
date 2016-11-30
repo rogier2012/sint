@@ -85,7 +85,7 @@ def signal_strength(surface,previous):
                 # print(m1.group(0))
                 quality = int(m1.group(0))
 
-        print(quality)
+        # print(quality)
         if (quality <= 0):
             dBm = -100
         elif (quality >= 100):
@@ -95,6 +95,7 @@ def signal_strength(surface,previous):
 
         result = float(result) + (float(quality) / 100)
     bars = int(result/20)
+    print(result)
     print(bars)
     if surface is not None:
 
