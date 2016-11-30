@@ -38,12 +38,13 @@ while running:
     # Scan touchscreen events
 
     for event in pygame.event.get():
-        page += 1
+
         if event.type == pygame.QUIT:
             pygame.display.quit()
             pygame.quit()
             running = False
         elif(event.type is MOUSEBUTTONUP):
+            page = page + 1
             if (page == 1 ):
                 begin_screen(lcd)
 
