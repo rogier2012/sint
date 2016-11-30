@@ -79,11 +79,11 @@ def signal_strength(surface,previous):
         m = re.search('Signal level=[0-9]*\/[0-9]*', iwconfig_string)
         if m:
             signal_level = m.group(0)
-            print(signal_level)
-            m1 = re.search('[0-9]*',signal_level)
+            # print(signal_level)
+            m1 = re.search('[0-9]+',signal_level)
             if m1:
-                print(m.group(0))
-                quality = int(m.group(0))
+                # print(m1.group(0))
+                quality = int(m1.group(0))
 
         print(quality)
         if (quality <= 0):
