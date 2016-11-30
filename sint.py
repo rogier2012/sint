@@ -54,6 +54,7 @@ while running:
                 pygame.display.update()
                 page = 3
             elif (page == 3):
+                lcd.fill(DEFAULT)
                 myThread = signalStrength(lcd,running)
                 myThread.start()
                 page = 4
