@@ -26,7 +26,7 @@ class signalStrength(threading.Thread):
         last_result = 1
         while self.running:
             last_result = signal_strength(self.surface,last_result)
-            sleep(0.5)
+            sleep(0.1)
 
 
 def show_bars(surface,number=5):
@@ -78,7 +78,7 @@ def signal_strength(surface,previous):
 
         m = re.search('Signal level=[0-9]*\/[0-9]*', iwconfig_string)
         if m:
-            signal_level = m.group(1)
+            signal_level = m.group(0)
 
         quality = int(signal_level[13:15])
 
@@ -98,6 +98,6 @@ def signal_strength(surface,previous):
 
     return bars
 
-while True:
-    print(signal_strength(None,1))
-    sleep(0.1)
+# while True:
+#     print(signal_strength(None,1))
+#     sleep(0.1)
