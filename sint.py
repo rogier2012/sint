@@ -45,7 +45,7 @@ while running:
             running = False
         elif(event.type is MOUSEBUTTONUP):
             page = page + 1
-            thread_run = False
+            thread_run = True
             if (page == 1 ):
                 begin_screen(lcd)
 
@@ -59,8 +59,8 @@ while running:
             elif (page == 3):
                 lcd.fill(DEFAULT)
 
-                myThread = signalStrength(lcd,thread_run)
-                myThread.start()
+                # myThread = signalStrength(lcd,thread_run)
+                # myThread.start()
 
             elif (page == 4):
                 lcd.fill(DEFAULT)
@@ -79,8 +79,8 @@ while running:
                 pos = pygame.mouse.get_pos()
                 if pos[0] > 160:
                     begin_screen(lcd)
-                    page = 1
-                    counter = counter + 1
+                    page = 2
+                    counter += 1
                 else:
                     pygame.display.quit()
                     pygame.quit()
