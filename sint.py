@@ -61,71 +61,94 @@ while running:
                 text_surface = font_small.render("iets speciaals te bedenken,", True, WHITE)
                 rect = text_surface.get_rect(center=(160, 60))
                 lcd.blit(text_surface, rect)
-                pygame.display.update()
                 t = font_small.render("kwam ik met een waslijst aan geschenken.", True, WHITE)
                 r = t.get_rect(center=(160, 80))
                 lcd.blit(t, r)
-                pygame.display.update()
                 t = font_small.render("Gelukkig heb ik de technologie", True, WHITE)
                 r = t.get_rect(center=(160, 100))
                 lcd.blit(t, r)
-                pygame.display.update()
                 t = font_small.render("in de hand,", True, WHITE)
                 r = t.get_rect(center=(160, 120))
                 lcd.blit(t, r)
-                pygame.display.update()
                 t = font_small.render("en jou wensen kon ik tellen", True, WHITE)
                 r = t.get_rect(center=(160, 140))
                 lcd.blit(t, r)
-                pygame.display.update()
                 t = font_small.render("in een mand.", True, WHITE)
                 r = t.get_rect(center=(160, 160))
                 lcd.blit(t, r)
-                pygame.display.update()
                 t = font_small.render("Maar dit jaar kwam er een suprise bij,", True, WHITE)
                 r = t.get_rect(center=(160, 180))
                 lcd.blit(t, r)
-                pygame.display.update()
                 t = font_small.render("dat bood een extra groot karwei.", True, WHITE)
                 r = t.get_rect(center=(160, 200))
                 lcd.blit(t, r)
-                pygame.display.update()
                 t = font_small.render("in een mand.", True, WHITE)
                 r = t.get_rect(center=(160, 160))
                 lcd.blit(t, r)
                 pygame.display.update()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             elif (page == 3):
                 lcd.fill(DEFAULT)
+                t = font_small.render("Toevallig was ik ook op jou open dag aanwezig,", True, WHITE)
+                r = t.get_rect(center=(160, 20))
+                lcd.blit(t, r)
+                t = font_small.render("niet dat je dat merkte, want jij was", True, WHITE)
+                r = t.get_rect(center=(160, 40))
+                lcd.blit(t, r)
+                t = font_small.render("met je studie keuze bezig.", True, WHITE)
+                r = t.get_rect(center=(160, 60))
+                lcd.blit(t, r)
+                t = font_small.render("Met die ervaring rijker,", True, WHITE)
+                r = t.get_rect(center=(160, 80))
+                lcd.blit(t, r)
+                t = font_small.render("slaat deze suprise de kop op de spijker.", True, WHITE)
+                r = t.get_rect(center=(160, 100))
+                lcd.blit(t, r)
+                t = font_small.render("Of hoorde dat andersom, spreekwoorden", True, WHITE)
+                r = t.get_rect(center=(160, 120))
+                lcd.blit(t, r)
+                t = font_small.render("zijn niet mijn sterkste punt,", True, WHITE)
+                r = t.get_rect(center=(160, 140))
+                lcd.blit(t, r)
+                t = font_small.render("Volg nu de volgende aanwijzing zodat .", True, WHITE)
+                r = t.get_rect(center=(160, 160))
+                lcd.blit(t, r)
+                t = font_small.render("je verder kunt", True, WHITE)
+                r = t.get_rect(center=(160, 180))
+                lcd.blit(t, r)
+                t = font_small.render("dat bood een extra groot karwei.", True, WHITE)
+                r = t.get_rect(center=(160, 200))
+                lcd.blit(t, r)
 
-                myThread = signalStrength(lcd,thread_run)
-                myThread.start()
+                pygame.display.update()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             elif (page == 4):
                 lcd.fill(DEFAULT)
-                text_surface = font_big.render("Quit?", True, WHITE)
+                text_surface = font_big.render("Klaar?", True, WHITE)
                 rect = text_surface.get_rect(center=(160,80))
                 lcd.blit(text_surface, rect)
-                text_surface = font_big.render("Yes", True, WHITE)
+                text_surface = font_big.render("Ja", True, WHITE)
                 rect = text_surface.get_rect(center=(80,160))
                 lcd.blit(text_surface, rect)
-                text_surface = font_big.render("No", True, WHITE)
+                text_surface = font_big.render("Nee", True, WHITE)
                 rect = text_surface.get_rect(center=(240,160))
                 lcd.blit(text_surface, rect)
                 pygame.display.update()
+
+
 
             elif (page == 5):
                 pos = pygame.mouse.get_pos()
@@ -134,7 +157,16 @@ while running:
                     page = 2
                     counter += 1
                 else:
-                    running = False
+
+                    lcd.fill(DEFAULT)
+
+                    myThread = signalStrength(lcd, thread_run)
+                    myThread.start()
+            # elif (page == 6):
+            #     lcd.fill(DEFAULT)
+            #
+            #     myThread = signalStrength(lcd,thread_run)
+            #     myThread.start()
 
     sleep(0.1)
 
