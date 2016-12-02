@@ -19,7 +19,7 @@ os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
 
 def begin_screen(surface):
     surface.fill(DEFAULT)
-    text_surface = font_big.render('Aine', True, WHITE)
+    text_surface = font_big_big.render('Aine', True, WHITE)
     rect = text_surface.get_rect(center=CENTER)
     surface.blit(text_surface, rect)
     pygame.display.update()
@@ -30,6 +30,7 @@ pygame.init()
 pygame.mouse.set_visible(False)
 lcd = pygame.display.set_mode((320, 240))
 font_big = pygame.font.Font(None, 50)
+font_big_big = pygame.font.Font(None, 80)
 font_small = pygame.font.Font(None, 20)
 begin_screen(lcd)
 pygame.display.update()
@@ -112,19 +113,35 @@ while running:
                 t = font_small.render("Volg nu de volgende aanwijzing zodat .", True, WHITE)
                 r = t.get_rect(center=(160, 160))
                 lcd.blit(t, r)
-                t = font_small.render("je verder kunt", True, WHITE)
+                t = font_small.render("je verder kunt.", True, WHITE)
                 r = t.get_rect(center=(160, 180))
                 lcd.blit(t, r)
-                t = font_small.render("dat bood een extra groot karwei.", True, WHITE)
+                t = font_small.render("Wanneer dit gedicht klaar is begint de hint,", True, WHITE)
                 r = t.get_rect(center=(160, 200))
+                lcd.blit(t, r)
+                t = font_small.render("die wordt netjes op het scherm geprint.", True, WHITE)
+                r = t.get_rect(center=(160, 220))
                 lcd.blit(t, r)
 
                 pygame.display.update()
 
 
+            elif (page == 3):
+                lcd.fill(DEFAULT)
+                t = font_small.render("Jou pakjes zijn ergens verborgen,", True, WHITE)
+                r = t.get_rect(center=(160, 20))
+                lcd.blit(t, r)
+                t = font_small.render("Dus zoek snel, anders vind je ze pas morgen.", True, WHITE)
+                r = t.get_rect(center=(160, 40))
+                lcd.blit(t, r)
+                # t = font_small.render("met je studie keuze bezig.", True, WHITE)
+                # r = t.get_rect(center=(160, 60))
+                # lcd.blit(t, r)
+                t = font_small.render("Groeten, de Technologie Piet", True, WHITE)
+                r = t.get_rect(center=(160, 80))
+                lcd.blit(t, r)
 
-
-
+                pygame.display.update()
 
 
 
