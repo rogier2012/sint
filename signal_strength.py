@@ -35,7 +35,7 @@ def show_bars(surface,number=5):
     text_surface = font_big.render("Pakjes", True, WHITE)
     text_surface1 = font_big.render("Zoeker", True, WHITE)
     rect = text_surface.get_rect(center=(80, 80))
-    rect1 = text_surface1.get_rect(center=(80, 120))
+    rect1 = text_surface1.get_rect(center=(80, 160))
     surface.blit(text_surface, rect)
     surface.blit(text_surface1,rect1)
     color = RED
