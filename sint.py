@@ -56,10 +56,55 @@ while running:
                 text_surface = font_small.render("Toen Sint mij vroeg om voor jou ", True, WHITE)
                 rect = text_surface.get_rect(center=(160, 40))
                 lcd.blit(text_surface, rect)
-                text_surface = font_small.render("iets speciaals te bedenken", True, WHITE)
+                text_surface = font_small.render("iets speciaals te bedenken,", True, WHITE)
                 rect = text_surface.get_rect(center=(160, 60))
                 lcd.blit(text_surface, rect)
                 pygame.display.update()
+                t = font_small.render("kwam ik met een waslijst aan geschenken.", True, WHITE)
+                r = t.get_rect(center=(160, 80))
+                lcd.blit(t, r)
+                pygame.display.update()
+                t = font_small.render("Gelukkig heb ik de technologie", True, WHITE)
+                r = t.get_rect(center=(160, 100))
+                lcd.blit(t, r)
+                pygame.display.update()
+                t = font_small.render("in de hand,", True, WHITE)
+                r = t.get_rect(center=(160, 120))
+                lcd.blit(t, r)
+                pygame.display.update()
+                t = font_small.render("en jou wensen kon ik tellen", True, WHITE)
+                r = t.get_rect(center=(160, 140))
+                lcd.blit(t, r)
+                pygame.display.update()
+                t = font_small.render("in één mand.", True, WHITE)
+                r = t.get_rect(center=(160, 160))
+                lcd.blit(t, r)
+                pygame.display.update()
+                t = font_small.render("Maar dit jaar kwam er een suprise bij,", True, WHITE)
+                r = t.get_rect(center=(160, 180))
+                lcd.blit(t, r)
+                pygame.display.update()
+                t = font_small.render("dat bood een extra groot karwei.", True, WHITE)
+                r = t.get_rect(center=(160, 200))
+                lcd.blit(t, r)
+                pygame.display.update()
+                t = font_small.render("in één mand.", True, WHITE)
+                r = t.get_rect(center=(160, 160))
+                lcd.blit(t, r)
+                pygame.display.update()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             elif (page == 3):
                 lcd.fill(DEFAULT)
