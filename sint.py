@@ -126,7 +126,7 @@ while running:
                 pygame.display.update()
 
 
-            elif (page == 3):
+            elif (page == 4):
                 lcd.fill(DEFAULT)
                 t = font_small.render("Jou pakjes zijn ergens verborgen,", True, WHITE)
                 r = t.get_rect(center=(160, 20))
@@ -152,7 +152,7 @@ while running:
 
 
 
-            elif (page == 4):
+            elif (page == 5):
                 lcd.fill(DEFAULT)
                 text_surface = font_big.render("Klaar?", True, WHITE)
                 rect = text_surface.get_rect(center=(160,80))
@@ -167,7 +167,7 @@ while running:
 
 
 
-            elif (page == 5):
+            elif (page == 6):
                 pos = pygame.mouse.get_pos()
                 if pos[0] > 160:
                     begin_screen(lcd)
