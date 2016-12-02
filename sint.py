@@ -17,7 +17,7 @@ os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
 
 def begin_screen(surface):
     surface.fill(DEFAULT)
-    text_surface = font_big.render('Hello World', True, WHITE)
+    text_surface = font_big.render('Aine', True, WHITE)
     rect = text_surface.get_rect(center=CENTER)
     surface.blit(text_surface, rect)
     pygame.display.update()
@@ -40,8 +40,7 @@ while running:
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
-            pygame.display.quit()
-            pygame.quit()
+
             running = False
         elif(event.type is MOUSEBUTTONUP):
             page = page + 1
@@ -52,15 +51,21 @@ while running:
             elif (page == 2):
                 lcd.fill(DEFAULT)
                 text_surface = font_small.render("Text hello Hello", True, WHITE)
-                rect = text_surface.get_rect(center=CENTER)
+                rect = text_surface.get_rect((160,20))
+                lcd.blit(text_surface, rect)
+                text_surface = font_small.render("Text hello Hello", True, WHITE)
+                rect = text_surface.get_rect((160, 40))
+                lcd.blit(text_surface, rect)
+                text_surface = font_small.render("Text hello Hello", True, WHITE)
+                rect = text_surface.get_rect((160, 60))
                 lcd.blit(text_surface, rect)
                 pygame.display.update()
 
             elif (page == 3):
                 lcd.fill(DEFAULT)
 
-                # myThread = signalStrength(lcd,thread_run)
-                # myThread.start()
+                myThread = signalStrength(lcd,thread_run)
+                myThread.start()
 
             elif (page == 4):
                 lcd.fill(DEFAULT)
@@ -82,10 +87,9 @@ while running:
                     page = 2
                     counter += 1
                 else:
-                    pygame.display.quit()
-                    pygame.quit()
                     running = False
 
     sleep(0.1)
 
-
+pygame.display.quit()
+pygame.quit()

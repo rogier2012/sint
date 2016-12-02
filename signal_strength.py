@@ -31,7 +31,12 @@ class signalStrength(threading.Thread):
 
 def show_bars(surface,number=5):
     surface.fill(DEFAULT)
-
+    font_big = pygame.font.Font(None, 50)
+    text_surface = font_big.render("Pakjes", True, WHITE)
+    text_surface = font_big.render("Zoeker", True, WHITE)
+    rect = text_surface.get_rect(center=(160, 80))
+    rect = text_surface.get_rect(center=(160, 120))
+    surface.blit(text_surface, rect)
     color = RED
     if number == 2:
         color = RED
