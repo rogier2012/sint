@@ -90,7 +90,7 @@ while running:
                 r = t.get_rect(center=(160, 200))
                 lcd.blit(t, r)
                 pygame.display.update()
-                t = font_small.render("in één mand.", True, WHITE)
+                t = font_small.render("in een mand.", True, WHITE)
                 r = t.get_rect(center=(160, 160))
                 lcd.blit(t, r)
                 pygame.display.update()
