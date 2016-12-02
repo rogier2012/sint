@@ -3,6 +3,8 @@ from pygame.locals import *
 import os
 from signal_strength import *
 #Colours
+
+# -*- coding: utf-8 -*-
 WHITE = (255,255,255)
 BLACK = (0,0,0)
 DEFAULT = (80,168,227)
