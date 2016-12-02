@@ -91,7 +91,6 @@ def signal_strength(surface,previous):
                 # print(m1.group(0))
                 quality = int(m1.group(0))
 
-        # print(quality)
         if (quality <= 0):
             dBm = -100
         elif (quality >= 100):
